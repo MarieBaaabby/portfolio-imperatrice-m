@@ -1,17 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exploration personnelle - Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Play&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --noir: #0b0b0b;
+      --blanc: #ffffff;
+      --vert: #007c5a;
+      --or: #bfa34a;
+    }
 
-    <!DOCTYPE html>
-    <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <title>Choix du style</title>
-    </head>
-    <body>
-        <h1>Bienvenue sur mon portfolio</h1>
-        <ul>
-            <li><a href="style1-luxe.html">Style 1 – Luxe Sombre</a></li>
-            <li><a href="style2-editorial.html">Style 2 – Éditorial</a></li>
-            <li><a href="style3-minimal.html">Style 3 – Minimal</a></li>
-        </ul>
-    </body>
-    </html>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    body {
+      background-color: var(--noir);
+      color: var(--blanc);
+      line-height: 1.6;
+      padding: 2rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    h1 {
+      font-family: 'Play', sans-serif;
+      color: var(--vert);
+      font-size: 2.5rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    nav a {
+      color: var(--or);
+      text-decoration: none;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      display: block;
+      height: 2px;
+      background: var(--or);
+      transition: width 0.3s;
+      width: 0;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    section {
+      margin-bottom: 4rem;
+    }
+
+    .terminal {
+      background-color: #1b1b1b;
+      padding: 1.5rem;
+      border-left: 5px solid var(--vert);
+      font-size: 0.95rem;
+      margin-top: 1rem;
+      white-space: pre-wrap;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--or);
+      margin-top: 5rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>&#9679; Lancement du système personnel...</h1>
+    <p class="terminal">Connexion à l'identité en cours...
+Chargement des modules créatifs...
+Interface prête.</p>
+  </header>
+
+  <nav>
+    <a href="#projets">Projets</a>
+    <a href="#apropos">À propos</a>
+    <a href="#competences">Compétences</a>
+    <a href="#activites">Activités</a>
+    <a href="#experiences">Expériences</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="projets">
+    <h2>Archives de mission / Projets</h2>
+    <p class="terminal">[Projet 01] - Nom du projet
+Description rapide ici...
+Technos utilisées : ...</p>
+    <p class="terminal">[Projet 02] - Nom du projet</p>
+  </section>
+
+  <section id="apropos">
+    <h2>Dossier personnel / À propos</h2>
+    <p class="terminal">Nom : [Ton Nom]
+Fonction : Créateur multidisciplinaire
+Résumé : Passionné(e) par la création, le jeu vidéo, et l’analyse du monde qui l’entoure...</p>
+  </section>
+
+  <section id="competences">
+    <h2>Modules installés / Compétences</h2>
+    <p class="terminal">- Adobe Suite (Illustrator, Photoshop...)
+- Blender (débutant à expert en cours)
+- Analyse couleur, construction créative...</p>
+  </section>
+
+  <section id="activites">
+    <h2>Logs d’exploration / Activités</h2>
+    <p class="terminal">Derniers jeux explorés : Tunic, FF14, Omori...
+Dernières inspirations : Documentaire sur la chute de Kodak...</p>
+  </section>
+
+  <section id="experiences">
+    <h2>Timeline de connexion / Expériences</h2>
+    <p class="terminal">[2025] Master Fashion Design - Nom de l’école
+[2024] Direction artistique - Stage chez X...</p>
+  </section>
+
+  <section id="contact">
+    <h2>Connexion entrante / Contact</h2>
+    <p class="terminal">Email : tonemail@email.com
+LinkedIn : https://linkedin.com/in/tonprofil</p>
+  </section>
+
+  <footer>
+    &copy; 2025 - Terminal personnel actif. Fait avec curiosité & émeraude.
+  </footer>
+</body>
+</html>
+
     
