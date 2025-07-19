@@ -221,27 +221,30 @@ LinkedIn : https://linkedin.com/in/tonprofil</p>
 
   <script>
     const loaderText = document.getElementById('loader-text');
-    const progressBar = document.getElementById('progress');
+    const progress = document.getElementById('progress');
     const loader = document.getElementById('loader');
     const app = document.getElementById('app-content');
 
+    // Étape 1 : Affichage initial
     setTimeout(() => {
-      loaderText.textContent = 'Chargement des modules créatifs...';
-      progressBar.style.width = '30%';
+      progress.style.width = '30%';
 
+      // Étape 2 : Changement de message + progression à 100%
       setTimeout(() => {
-        progressBar.style.width = '100%';
+        loaderText.textContent = 'Chargement des modules créatifs...';
+        progress.style.width = '100%';
 
+        // Étape 3 : Message final
         setTimeout(() => {
           loaderText.textContent = 'Interface prête.';
 
+          // Étape 4 : Disparition
           setTimeout(() => {
             loader.style.display = 'none';
             app.style.display = 'block';
           }, 1500);
 
         }, 1000);
-
       }, 1000);
     }, 1000);
   </script>
