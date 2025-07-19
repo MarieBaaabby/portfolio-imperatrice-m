@@ -25,15 +25,47 @@
       background-color: var(--noir);
       color: var(--blanc);
       line-height: 1.6;
-      padding: 2rem;
       background-image: radial-gradient(var(--vert) 1px, transparent 1px);
       background-size: 20px 20px;
+      overflow: hidden;
+    }
+
+    #loader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      background-color: var(--noir);
+      color: var(--blanc);
+    }
+
+    #progress-bar {
+      width: 300px;
+      height: 10px;
+      background: #333;
+      margin-top: 1rem;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    #progress {
+      height: 100%;
+      width: 0%;
+      background: var(--vert);
+      transition: width 1s ease;
+    }
+
+    #app-content {
+      display: none;
+      padding: 2rem;
+      animation: fadeIn 1.5s ease forwards;
     }
 
     header {
       text-align: center;
       margin-bottom: 3rem;
-      animation: fadeIn 2s ease-in-out;
     }
 
     h1 {
@@ -80,7 +112,6 @@
 
     section {
       margin-bottom: 4rem;
-      animation: fadeInUp 1s ease both;
     }
 
     h2 {
@@ -115,76 +146,104 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>&#9679; Lancement du système personnel...</h1>
-    <p class="terminal">Connexion à l'identité en cours...
-Chargement des modules créatifs...
-Interface prête.</p>
-  </header>
+  <div id="loader">
+    <p id="loader-text">Connexion à l'identité en cours...</p>
+    <div id="progress-bar">
+      <div id="progress"></div>
+    </div>
+  </div>
 
-  <nav>
-    <a href="#projets">Projets</a>
-    <a href="#apropos">À propos</a>
-    <a href="#competences">Compétences</a>
-    <a href="#activites">Activités</a>
-    <a href="#experiences">Expériences</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <div id="app-content">
+    <header>
+      <h1>&#9679; Lancement du système personnel...</h1>
+      <p class="terminal">Interface prête.</p>
+    </header>
 
-  <section id="projets">
-    <h2>Archives de mission / Projets</h2>
-    <p class="terminal">[Projet 01] - Nom du projet
+    <nav>
+      <a href="#projets">Projets</a>
+      <a href="#apropos">À propos</a>
+      <a href="#competences">Compétences</a>
+      <a href="#activites">Activités</a>
+      <a href="#experiences">Expériences</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <section id="projets">
+      <h2>Archives de mission / Projets</h2>
+      <p class="terminal">[Projet 01] - Nom du projet
 Description rapide ici...
 Technos utilisées : ...</p>
-    <p class="terminal">[Projet 02] - Nom du projet</p>
-  </section>
+      <p class="terminal">[Projet 02] - Nom du projet</p>
+    </section>
 
-  <section id="apropos">
-    <h2>Dossier personnel / À propos</h2>
-    <p class="terminal">Nom : [Ton Nom]
+    <section id="apropos">
+      <h2>Dossier personnel / À propos</h2>
+      <p class="terminal">Nom : [Ton Nom]
 Fonction : Créateur multidisciplinaire
 Résumé : Passionné(e) par la création, le jeu vidéo, et l’analyse du monde qui l’entoure...</p>
-  </section>
+    </section>
 
-  <section id="competences">
-    <h2>Modules installés / Compétences</h2>
-    <p class="terminal">- Adobe Suite (Illustrator, Photoshop...)
+    <section id="competences">
+      <h2>Modules installés / Compétences</h2>
+      <p class="terminal">- Adobe Suite (Illustrator, Photoshop...)
 - Blender (débutant à expert en cours)
 - Analyse couleur, construction créative...</p>
-  </section>
+    </section>
 
-  <section id="activites">
-    <h2>Logs d’exploration / Activités</h2>
-    <p class="terminal">Derniers jeux explorés : Tunic, FF14, Omori...
+    <section id="activites">
+      <h2>Logs d’exploration / Activités</h2>
+      <p class="terminal">Derniers jeux explorés : Tunic, FF14, Omori...
 Dernières inspirations : Documentaire sur la chute de Kodak...</p>
-  </section>
+    </section>
 
-  <section id="experiences">
-    <h2>Timeline de connexion / Expériences</h2>
-    <p class="terminal">[2025] Master Fashion Design - Nom de l’école
+    <section id="experiences">
+      <h2>Timeline de connexion / Expériences</h2>
+      <p class="terminal">[2025] Master Fashion Design - Nom de l’école
 [2024] Direction artistique - Stage chez X...</p>
-  </section>
+    </section>
 
-  <section id="contact">
-    <h2>Connexion entrante / Contact</h2>
-    <p class="terminal">Email : tonemail@email.com
+    <section id="contact">
+      <h2>Connexion entrante / Contact</h2>
+      <p class="terminal">Email : tonemail@email.com
 LinkedIn : https://linkedin.com/in/tonprofil</p>
-  </section>
+    </section>
 
-  <footer>
-    &copy; 2025 - Terminal personnel actif. Fait avec curiosité & émeraude.
-  </footer>
+    <footer>
+      &copy; 2025 - Terminal personnel actif. Fait avec curiosité & émeraude.
+    </footer>
+  </div>
+
+  <script>
+    const loaderText = document.getElementById('loader-text');
+    const progressBar = document.getElementById('progress');
+    const loader = document.getElementById('loader');
+    const app = document.getElementById('app-content');
+
+    setTimeout(() => {
+      loaderText.textContent = 'Chargement des modules créatifs...';
+      progressBar.style.width = '30%';
+
+      setTimeout(() => {
+        progressBar.style.width = '100%';
+
+        setTimeout(() => {
+          loaderText.textContent = 'Interface prête.';
+
+          setTimeout(() => {
+            loader.style.display = 'none';
+            app.style.display = 'block';
+          }, 1500);
+
+        }, 1000);
+
+      }, 1000);
+    }, 1000);
+  </script>
 </body>
 </html>
-
