@@ -26,17 +26,21 @@
       color: var(--blanc);
       line-height: 1.6;
       padding: 2rem;
+      background-image: radial-gradient(var(--vert) 1px, transparent 1px);
+      background-size: 20px 20px;
     }
 
     header {
       text-align: center;
       margin-bottom: 3rem;
+      animation: fadeIn 2s ease-in-out;
     }
 
     h1 {
       font-family: 'Play', sans-serif;
       color: var(--vert);
       font-size: 2.5rem;
+      text-shadow: 0 0 5px var(--or);
     }
 
     nav {
@@ -44,12 +48,17 @@
       justify-content: center;
       gap: 2rem;
       margin: 2rem 0;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1rem;
+      border-radius: 10px;
+      backdrop-filter: blur(4px);
     }
 
     nav a {
       color: var(--or);
       text-decoration: none;
       position: relative;
+      transition: transform 0.2s ease;
     }
 
     nav a::after {
@@ -65,8 +74,21 @@
       width: 100%;
     }
 
+    nav a:hover {
+      transform: scale(1.1);
+    }
+
     section {
       margin-bottom: 4rem;
+      animation: fadeInUp 1s ease both;
+    }
+
+    h2 {
+      color: var(--or);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--vert);
+      padding-bottom: 0.5rem;
     }
 
     .terminal {
@@ -76,6 +98,13 @@
       font-size: 0.95rem;
       margin-top: 1rem;
       white-space: pre-wrap;
+      box-shadow: 0 0 10px rgba(0, 255, 128, 0.2);
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+
+    .terminal:hover {
+      background-color: #222;
     }
 
     footer {
@@ -83,6 +112,16 @@
       font-size: 0.85rem;
       color: var(--or);
       margin-top: 5rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -149,4 +188,3 @@ LinkedIn : https://linkedin.com/in/tonprofil</p>
 </body>
 </html>
 
-    
