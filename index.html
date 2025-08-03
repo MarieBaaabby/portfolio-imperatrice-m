@@ -28,11 +28,12 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
+      overflow: hidden;
     }
 
     .console-screen {
-      width: 600px;
-      height: 360px;
+      width: 900px;
+      height: 540px;
       background-color: #003d24;
       border: 12px solid var(--vert-imperial);
       border-radius: 20px;
@@ -72,19 +73,21 @@
     }
 
     .console-controller {
-      width: 500px;
-      height: 200px;
+      width: 700px;
+      height: 220px;
       background: linear-gradient(to bottom, var(--vert-imperial), var(--gris-console));
       border: 10px solid var(--vert-imperial);
       border-radius: 30px;
-      display: flex;
-      justify-content: space-around;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
       align-items: center;
+      padding: 0 40px;
+      gap: 10px;
       box-shadow: 0 0 30px var(--vert-fluo);
       position: relative;
     }
 
-    .joystick, .buttons, .dpad {
+    .controller-button {
       width: 60px;
       height: 60px;
       background: radial-gradient(circle at center, var(--vert-fluo), var(--vert-imperial));
@@ -94,28 +97,83 @@
       justify-content: center;
       align-items: center;
       cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.2s;
+    }
+
+    .controller-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px var(--vert-fluo);
+    }
+
+    .controller-button:active {
+      transform: scale(0.95);
+      box-shadow: inset 0 0 10px var(--vert-fluo);
+    }
+
+    .music-toggle {
+      position: absolute;
+      top: -40px;
+      right: 20px;
+      width: 30px;
+      height: 30px;
+      background-color: var(--vert-citron);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--vert-fluo);
+      cursor: pointer;
+    }
+
+    .background-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: -1;
+      background: repeating-radial-gradient(circle at center, rgba(0, 255, 136, 0.05) 0, transparent 100px);
+      animation: pulse 4s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
     }
   </style>
 </head>
 <body>
+  <div class="background-animation"></div>
 
   <!-- ÉCRAN DE CONSOLE SÉPARÉ -->
   <div class="console-screen">
     <iframe src="screens/screen-accueil.html" id="screenFrame"></iframe>
   </div>
 
-  <!-- MANETTE SÉPARÉE -->
+  <!-- MANETTE SÉPARÉE ET INTERACTIVE -->
   <div class="console-controller">
-    <div class="dpad" onclick="changeScreen('screens/screen-accueil.html')" title="Accueil"></div>
-    <div class="joystick" onclick="changeScreen('screens/screen-projets.html')" title="Projets"></div>
-    <div class="buttons" onclick="changeScreen('screens/screen-contact.html')" title="Contact"></div>
+    <div class="controller-button" onclick="changeScreen('screens/screen-accueil.html')" title="Accueil">A</div>
+    <div class="controller-button" onclick="changeScreen('screens/screen-projets.html')" title="Projets">B</div>
+    <div class="controller-button" onclick="changeScreen('screens/screen-contact.html')" title="Contact">X</div>
+    <div class="controller-button" onclick="changeScreen('screens/screen-credits.html')" title="Crédits">Y</div>
+    <div class="music-toggle" onclick="toggleMusic()" title="Activer/Désactiver la musique"></div>
   </div>
+
+  <audio id="consoleMusic" loop>
+    <source src="assets/music.mp3" type="audio/mpeg">
+  </audio>
 
   <script>
     function changeScreen(path) {
       document.getElementById("screenFrame").src = path;
     }
-  </script>
 
+    function toggleMusic() {
+      const music = document.getElementById("consoleMusic");
+      if (music.paused) {
+        music.play();
+      } else {
+        music.pause();
+      }
+    }
+  </script>
 </body>
 </html>
