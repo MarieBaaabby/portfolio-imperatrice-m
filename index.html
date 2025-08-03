@@ -3,250 +3,127 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Exploration personnelle - Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Play&display=swap" rel="stylesheet">
+  <title>Portfolio Console</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap">
   <style>
     :root {
-      --noir: #0b0b0b;
-      --blanc: #ffffff;
-      --vert: #007c5a;
-      --or: #bfa34a;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'JetBrains Mono', monospace;
+      --vert-imperial: #00561B;
+      --noir-profond: #0b0b0b;
+      --gris-tech: #1e1e1e;
+      --vert-fluo: #00ff88;
     }
 
     body {
-      background-color: var(--noir);
-      color: var(--blanc);
-      line-height: 1.6;
-      background-image: radial-gradient(var(--vert) 1px, transparent 1px);
-      background-size: 20px 20px;
+      margin: 0;
+      padding: 0;
+      background-color: var(--noir-profond);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'JetBrains Mono', monospace;
+      overflow: hidden;
+      background-image: linear-gradient(135deg, var(--noir-profond) 40%, var(--vert-imperial) 100%);
     }
 
-    #loader {
+    .console-wrapper {
+      position: relative;
+      width: 95vw;
+      max-width: 1300px;
+      height: 85vh;
+      background: var(--gris-tech);
+      border: 12px solid var(--vert-imperial);
+      border-radius: 25px;
+      box-shadow: 0 0 30px var(--vert-imperial);
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    .console-screen {
+      flex: 1;
+      background-color: #000;
+      position: relative;
+      border-bottom: 3px solid var(--vert-fluo);
+      box-shadow: inset 0 0 15px var(--vert-fluo);
+    }
+
+    .console-screen iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background-color: #000;
+    }
+
+    .console-controller {
+      position: relative;
+      height: 170px;
+      background: linear-gradient(to top, var(--vert-imperial), var(--gris-tech));
+      display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      text-align: center;
-      background-color: var(--noir);
-      color: var(--blanc);
-      overflow: hidden;
+      border-top: 2px solid var(--vert-fluo);
+      box-shadow: inset 0 5px 10px #003f14;
     }
 
-    #progress-bar {
-      width: 300px;
-      height: 10px;
-      background: #333;
-      margin-top: 1rem;
-      border-radius: 5px;
-      overflow: hidden;
-    }
-
-    #progress {
+    .controller-img {
       height: 100%;
-      width: 0%;
-      background: var(--vert);
-      transition: width 1s ease;
+      object-fit: contain;
+      pointer-events: none;
     }
 
-    #app-content {
-      display: none;
-      padding: 2rem;
-      animation: fadeIn 1.5s ease forwards;
+    .btn {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: transparent;
+      cursor: pointer;
     }
 
-    header {
-      text-align: center;
-      margin-bottom: 3rem;
+    .btn:hover {
+      box-shadow: 0 0 10px var(--vert-fluo);
+      border-radius: 50%;
     }
 
-    h1 {
-      font-family: 'Play', sans-serif;
-      color: var(--vert);
-      font-size: 2.5rem;
-      text-shadow: 0 0 5px var(--or);
+    /* Positionnement des boutons à ajuster selon ta manette */
+    .btn-accueil {
+      top: 55px;
+      left: 42%;
     }
 
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin: 2rem 0;
-      background: rgba(255, 255, 255, 0.05);
-      padding: 1rem;
-      border-radius: 10px;
-      backdrop-filter: blur(4px);
+    .btn-projets {
+      top: 55px;
+      left: 48%;
     }
 
-    nav a {
-      color: var(--or);
-      text-decoration: none;
-      position: relative;
-      transition: transform 0.2s ease;
-    }
-
-    nav a::after {
-      content: '';
-      display: block;
-      height: 2px;
-      background: var(--or);
-      transition: width 0.3s;
-      width: 0;
-    }
-
-    nav a:hover::after {
-      width: 100%;
-    }
-
-    nav a:hover {
-      transform: scale(1.1);
-    }
-
-    section {
-      margin-bottom: 4rem;
-    }
-
-    h2 {
-      color: var(--or);
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-      border-bottom: 1px solid var(--vert);
-      padding-bottom: 0.5rem;
-    }
-
-    .terminal {
-      background-color: #1b1b1b;
-      padding: 1.5rem;
-      border-left: 5px solid var(--vert);
-      font-size: 0.95rem;
-      margin-top: 1rem;
-      white-space: pre-wrap;
-      box-shadow: 0 0 10px rgba(0, 255, 128, 0.2);
-      border-radius: 4px;
-      transition: background 0.3s;
-    }
-
-    .terminal:hover {
-      background-color: #222;
-    }
-
-    footer {
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--or);
-      margin-top: 5rem;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    .btn-contact {
+      top: 55px;
+      left: 54%;
     }
   </style>
 </head>
 <body>
-  <div id="loader">
-    <p id="loader-text">Connexion à l'identité en cours...</p>
-    <div id="progress-bar">
-      <div id="progress"></div>
+  <div class="console-wrapper">
+    <!-- Écran de la console -->
+    <div class="console-screen" id="consoleScreen">
+      <iframe src="screens/screen-accueil.html" frameborder="0" id="screenFrame"></iframe>
+    </div>
+
+    <!-- Manette interactive -->
+    <div class="console-controller">
+      <img src="assets/controller.png" alt="manette" class="controller-img">
+      <!-- Zones cliquables sur la manette -->
+      <div class="btn btn-accueil" onclick="changeScreen('screens/screen-accueil.html')"></div>
+      <div class="btn btn-projets" onclick="changeScreen('screens/screen-projets.html')"></div>
+      <div class="btn btn-contact" onclick="changeScreen('screens/screen-contact.html')"></div>
     </div>
   </div>
 
-  <div id="app-content">
-    <header>
-      <h1>&#9679; Lancement du système personnel...</h1>
-      <p class="terminal">Interface prête.</p>
-    </header>
-
-    <nav>
-      <a href="#projets">Projets</a>
-      <a href="#apropos">À propos</a>
-      <a href="#competences">Compétences</a>
-      <a href="#activites">Activités</a>
-      <a href="#experiences">Expériences</a>
-      <a href="#contact">Contact</a>
-    </nav>
-
-    <section id="projets">
-      <h2>Archives de mission / Projets</h2>
-      <p class="terminal">[Projet 01] - Nom du projet
-Description rapide ici...
-Technos utilisées : ...</p>
-      <p class="terminal">[Projet 02] - Nom du projet</p>
-    </section>
-
-    <section id="apropos">
-      <h2>Dossier personnel / À propos</h2>
-      <p class="terminal">Nom : [Ton Nom]
-Fonction : Créateur multidisciplinaire
-Résumé : Passionné(e) par la création, le jeu vidéo, et l’analyse du monde qui l’entoure...</p>
-    </section>
-
-    <section id="competences">
-      <h2>Modules installés / Compétences</h2>
-      <p class="terminal">- Adobe Suite (Illustrator, Photoshop...)
-- Blender (débutant à expert en cours)
-- Analyse couleur, construction créative...</p>
-    </section>
-
-    <section id="activites">
-      <h2>Logs d’exploration / Activités</h2>
-      <p class="terminal">Derniers jeux explorés : Tunic, FF14, Omori...
-Dernières inspirations : Documentaire sur la chute de Kodak...</p>
-    </section>
-
-    <section id="experiences">
-      <h2>Timeline de connexion / Expériences</h2>
-      <p class="terminal">[2025] Master Fashion Design - Nom de l’école
-[2024] Direction artistique - Stage chez X...</p>
-    </section>
-
-    <section id="contact">
-      <h2>Connexion entrante / Contact</h2>
-      <p class="terminal">Email : tonemail@email.com
-LinkedIn : https://linkedin.com/in/tonprofil</p>
-    </section>
-
-    <footer>
-      &copy; 2025 - Terminal personnel actif. Fait avec curiosité & émeraude.
-    </footer>
-  </div>
-
   <script>
-    const loaderText = document.getElementById('loader-text');
-    const progress = document.getElementById('progress');
-    const loader = document.getElementById('loader');
-    const app = document.getElementById('app-content');
-
-    // Étape 1 : Affichage initial
-    setTimeout(() => {
-      progress.style.width = '30%';
-
-      // Étape 2 : Changement de message + progression à 100%
-      setTimeout(() => {
-        loaderText.textContent = 'Chargement des modules créatifs...';
-        progress.style.width = '100%';
-
-        // Étape 3 : Message final
-        setTimeout(() => {
-          loaderText.textContent = 'Interface prête.';
-
-          // Étape 4 : Disparition
-          setTimeout(() => {
-            loader.style.display = 'none';
-            app.style.display = 'block';
-          }, 1500);
-
-        }, 1000);
-      }, 1000);
-    }, 1000);
+    function changeScreen(path) {
+      document.getElementById("screenFrame").src = path;
+    }
   </script>
 </body>
 </html>
