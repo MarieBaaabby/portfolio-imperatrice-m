@@ -608,18 +608,17 @@
             width: 90vw;
             max-width: 600px;
             height: 200px;
-            background: linear-gradient(145deg, #2d5016, #3a6b1f, #4a8428);
+            background: transparent;
+            background-image: url('https://i.postimg.cc/KjndT5L6/Manette-Citron.png') !important;
             border-radius: 35px;
-            border: 4px solid #5a9b32;
+            border: none;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 20px 30px;
             box-shadow: 
-                0 15px 30px rgba(0, 0, 0, 0.5),
-                inset 0 2px 0 rgba(255, 255, 255, 0.1),
-                inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+                0 15px 30px rgba(0, 0, 0, 0.5);
         }
 
         .controller-image {
@@ -628,10 +627,11 @@
             left: 0;
             width: 100%;
             height: 100%;
+            background-image: url('https://i.postimg.cc/KjndT5L6/Manette-Citron.png');
             background-size: cover;
             background-position: center;
-            border-radius: 31px;
-            opacity: 0.8;
+            border-radius: 35px;
+            opacity: 1;
             z-index: 1;
         }
 
@@ -1120,7 +1120,7 @@
 
         <!-- MANETTE -->
         <div class="controller">
-            <div class="controller-image" id="controllerImage"></div>
+            <div class="controller-image" style="background-image: url('https://i.postimg.cc/KjndT5L6/Manette-Citron.png'); opacity: 1; z-index: 1;"></div>
             
             <div class="controller-content">
                 <!-- D-PAD -->
@@ -1138,7 +1138,7 @@
 
                 <!-- ÉCRAN CENTRAL + PETITS BOUTONS -->
                 <div style="display: flex; flex-direction: column; align-items: center;">
-                    <div class="center-screen" onclick="showCustomization()">
+                    <div class="center-screen">
                         <div id="consoleName">🍋 Console Portfolio</div>
                         <div style="font-size: 0.7rem; opacity: 0.7;" id="consoleSubtext">Cliquez pour personnaliser</div>
                     </div>
@@ -1554,20 +1554,6 @@
             const hours = now.getHours().toString().padStart(2, '0');
             const minutes = now.getMinutes().toString().padStart(2, '0');
             document.getElementById('timeDisplay').textContent = `${hours}:${minutes}`;
-        }
-
-        // Personnalisation
-        function showCustomization() {
-            const backgroundUrl = prompt('URL de l\'image de fond d\'écran (optionnel) :');
-            const controllerUrl = prompt('URL de l\'image de manette (optionnel) :');
-            
-            if (backgroundUrl && backgroundUrl.trim()) {
-                document.getElementById('backgroundImage').style.backgroundImage = `url(${backgroundUrl})`;
-            }
-            
-            if (controllerUrl && controllerUrl.trim()) {
-                document.getElementById('controllerImage').style.backgroundImage = `url(${controllerUrl})`;
-            }
         }
 
         // Initialisation
