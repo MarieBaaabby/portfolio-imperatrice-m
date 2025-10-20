@@ -565,6 +565,22 @@
             text-align: center;
         }
 
+        /* INDICATEUR DE NAVIGATION CLAVIER */
+        .keyboard-hint {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #ccc;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
         /* ANIMATIONS */
         @keyframes pulse {
             0%, 100% { opacity: 1; }
@@ -628,6 +644,10 @@
             
             .section-card .icon {
                 font-size: 3rem;
+            }
+
+            .keyboard-hint {
+                display: none;
             }
         }
 
@@ -703,6 +723,11 @@
                         </div>
                     </div>
 
+                    <!-- INDICATEUR DE NAVIGATION -->
+                    <div class="keyboard-hint">
+                        💡 Utilisez les touches ← → pour naviguer et Entrée pour sélectionner
+                    </div>
+
                     <!-- MENU INFÉRIEUR -->
                     <div class="bottom-menu">
                         <button class="menu-icon" data-action="music">♪</button>
@@ -714,7 +739,7 @@
                 <div class="dedicated-page" id="pageStyle">
                     <div class="page-header">
                         <h2 id="styleTitle">🎨 Style</h2>
-                        <button class="back-button" onclick="goBack()">✕</button>
+                        <button class="back-button" onclick="portfolio.goBack()">✕</button>
                     </div>
                     <div class="page-content">
                         <h3 id="styleSubtitle">Mon Style Créatif</h3>
@@ -725,7 +750,7 @@
                 <div class="dedicated-page" id="pageGraphisme">
                     <div class="page-header">
                         <h2 id="graphismeTitle">🖼️ Graphisme</h2>
-                        <button class="back-button" onclick="goBack()">✕</button>
+                        <button class="back-button" onclick="portfolio.goBack()">✕</button>
                     </div>
                     <div class="page-content">
                         <h3 id="graphismeSubtitle">Créations Graphiques</h3>
@@ -736,7 +761,7 @@
                 <div class="dedicated-page" id="pageProjets">
                     <div class="page-header">
                         <h2 id="projetsTitle">💻 Projets</h2>
-                        <button class="back-button" onclick="goBack()">✕</button>
+                        <button class="back-button" onclick="portfolio.goBack()">✕</button>
                     </div>
                     <div class="page-content">
                         <h3 id="projetsSubtitle">Mes Projets Récents</h3>
@@ -747,7 +772,7 @@
                 <div class="dedicated-page" id="pageEvenements">
                     <div class="page-header">
                         <h2 id="evenementsTitle">🎉 Évènements</h2>
-                        <button class="back-button" onclick="goBack()">✕</button>
+                        <button class="back-button" onclick="portfolio.goBack()">✕</button>
                     </div>
                     <div class="page-content">
                         <h3 id="evenementsSubtitle">Évènements & Actualités</h3>
@@ -758,7 +783,7 @@
                 <div class="dedicated-page" id="pageApropos">
                     <div class="page-header">
                         <h2 id="aproprosTitre">👤 À propos</h2>
-                        <button class="back-button" onclick="goBack()">✕</button>
+                        <button class="back-button" onclick="portfolio.goBack()">✕</button>
                     </div>
                     <div class="page-content">
                         <h3 id="aproposSousTitre">À propos de moi</h3>
@@ -769,7 +794,7 @@
                 <div class="dedicated-page" id="pageContact">
                     <div class="page-header">
                         <h2 id="contactTitle">📧 Contact</h2>
-                        <button class="back-button" onclick="goBack()">✕</button>
+                        <button class="back-button" onclick="portfolio.goBack()">✕</button>
                     </div>
                     <div class="page-content">
                         <h3 id="contactSubtitle">Contactez-moi</h3>
@@ -780,7 +805,7 @@
                 <div class="dedicated-page" id="pageSettings">
                     <div class="page-header">
                         <h2 id="settingsTitle">⚙ Paramètres</h2>
-                        <button class="back-button" onclick="goBack()">✕</button>
+                        <button class="back-button" onclick="portfolio.goBack()">✕</button>
                     </div>
                     <div class="page-content">
                         <div class="language-selector">
@@ -805,6 +830,8 @@
     </div>
 
     <script>
+        let portfolio;
+
         class PortfolioInterface {
             constructor() {
                 this.currentSection = 0;
@@ -886,7 +913,7 @@
                 this.setupEventListeners();
                 this.updateTime();
                 setInterval(() => this.updateTime(), 1000);
-                this.sections[0].classList.add('active');
+                this.updateActiveSection();
                 
                 // Configuration des sélecteurs
                 document.getElementById('languageSelect').addEventListener('change', (e) => {
@@ -899,7 +926,7 @@
             }
 
             setupEventListeners() {
-                // Sections
+                // Sections - clic souris
                 this.sections.forEach((section, index) => {
                     section.addEventListener('click', () => {
                         this.currentSection = index;
@@ -920,33 +947,43 @@
 
                 // Support clavier
                 document.addEventListener('keydown', (e) => this.handleKeyboard(e));
+
+                // Focus sur l'écran pour la navigation clavier
+                document.querySelector('.screen').setAttribute('tabindex', '0');
+                document.querySelector('.screen').focus();
             }
 
             handleKeyboard(e) {
+                e.preventDefault();
+                
                 switch(e.key) {
                     case 'ArrowLeft': 
-                        if (this.currentMenu === 'sections') {
-                            this.navigateSection(-1);
-                        } else {
-                            this.navigateBottomMenu(-1);
+                        if (!this.currentPage) {
+                            if (this.currentMenu === 'sections') {
+                                this.navigateSection(-1);
+                            } else {
+                                this.navigateBottomMenu(-1);
+                            }
                         }
                         break;
                     case 'ArrowRight': 
-                        if (this.currentMenu === 'sections') {
-                            this.navigateSection(1);
-                        } else {
-                            this.navigateBottomMenu(1);
+                        if (!this.currentPage) {
+                            if (this.currentMenu === 'sections') {
+                                this.navigateSection(1);
+                            } else {
+                                this.navigateBottomMenu(1);
+                            }
                         }
                         break;
                     case 'ArrowDown': 
-                        if (this.currentMenu === 'sections') {
+                        if (!this.currentPage && this.currentMenu === 'sections') {
                             this.currentMenu = 'bottom-menu';
                             this.currentBottomMenuItem = 0;
                             this.updateMenuSelection();
                         }
                         break;
                     case 'ArrowUp': 
-                        if (this.currentMenu === 'bottom-menu') {
+                        if (!this.currentPage && this.currentMenu === 'bottom-menu') {
                             this.currentMenu = 'sections';
                             this.updateMenuSelection();
                         }
@@ -976,11 +1013,12 @@
             navigateSection(direction) {
                 this.sections[this.currentSection].classList.remove('active');
                 this.currentSection = (this.currentSection + direction + this.sections.length) % this.sections.length;
-                this.sections[this.currentSection].classList.add('active');
+                this.updateActiveSection();
                 
+                // Scroll automatique
                 const cardWidth = 285;
                 this.sectionsScroll.scrollTo({
-                    left: this.currentSection * cardWidth - 50,
+                    left: this.currentSection * cardWidth - (this.sectionsScroll.clientWidth / 2) + (cardWidth / 2),
                     behavior: 'smooth'
                 });
             }
@@ -993,7 +1031,9 @@
 
             updateActiveSection() {
                 this.sections.forEach(s => s.classList.remove('active'));
-                this.sections[this.currentSection].classList.add('active');
+                if (this.sections[this.currentSection]) {
+                    this.sections[this.currentSection].classList.add('active');
+                }
             }
 
             updateMenuSelection() {
@@ -1001,7 +1041,7 @@
                 this.bottomMenuItems.forEach(item => item.classList.remove('selected'));
                 
                 if (this.currentMenu === 'sections') {
-                    this.sections[this.currentSection].classList.add('active');
+                    this.updateActiveSection();
                 } else {
                     this.bottomMenuItems[this.currentBottomMenuItem].classList.add('selected');
                 }
@@ -1032,6 +1072,9 @@
                     this.currentPage = null;
                     this.currentMenu = 'sections';
                     this.updateMenuSelection();
+                    
+                    // Remettre le focus sur l'écran
+                    document.querySelector('.screen').focus();
                 }
             }
 
@@ -1083,14 +1126,8 @@
 
         // Initialisation
         document.addEventListener('DOMContentLoaded', () => {
-            new PortfolioInterface();
+            portfolio = new PortfolioInterface();
         });
-
-        // Fonction globale pour le bouton retour
-        function goBack() {
-            const portfolio = new PortfolioInterface();
-            portfolio.goBack();
-        }
     </script>
 </body>
 </html>
