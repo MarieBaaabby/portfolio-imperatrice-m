@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Console Portfolio Interactive</title>
+    <title>Portfolio Interactive</title>
     <style>
         * {
             margin: 0;
@@ -29,7 +29,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 40px;
+            gap: 0;
             width: 100%;
             max-width: 1400px;
         }
@@ -38,9 +38,9 @@
         .screen-container {
             width: 95vw;
             max-width: 1200px;
-            height: 70vh;
-            min-height: 500px;
-            max-height: 700px;
+            height: 75vh;
+            min-height: 600px;
+            max-height: 800px;
             background: linear-gradient(145deg, #2a2a3e, #1e1e32);
             border-radius: 25px;
             border: 6px solid #4a5568;
@@ -193,7 +193,7 @@
             scroll-behavior: smooth;
             scrollbar-width: none;
             -ms-overflow-style: none;
-            justify-content: flex-start;
+            justify-content: center;
             align-items: center;
             padding: 25px 50px;
         }
@@ -565,190 +565,6 @@
             text-align: center;
         }
 
-        /* MANETTE AGRANDIE */
-        .controller {
-            width: 95vw;
-            max-width: 800px;
-            height: 250px;
-            background: transparent;
-            border-radius: 45px;
-            border: none;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 25px 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-        }
-
-        .controller::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(145deg, #3a6b1f, #2d5016);
-            border-radius: 45px;
-            z-index: 1;
-        }
-
-        .controller-content {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        /* D-PAD AGRANDI */
-        .dpad {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
-            gap: 4px;
-            width: 160px;
-            height: 160px;
-            background: linear-gradient(145deg, #3a6b1f, #2d5016);
-            border-radius: 50%;
-            padding: 12px;
-            border: 3px solid #4a8428;
-            box-shadow: 
-                inset 0 4px 8px rgba(0, 0, 0, 0.4),
-                0 3px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        .dpad-button {
-            background: linear-gradient(145deg, #85e085, #4a8428, #3a6b1f);
-            border: 2px solid #5a9b32;
-            color: #0d1f08;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 1.5rem;
-            font-weight: bold;
-            position: relative;
-            border-radius: 10px;
-            box-shadow: 
-                0 5px 10px rgba(0, 0, 0, 0.4),
-                inset 0 3px 6px rgba(255, 255, 255, 0.4),
-                inset 0 -3px 6px rgba(0, 0, 0, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            margin: auto;
-        }
-
-        .dpad-button:hover {
-            background: linear-gradient(145deg, #6bb33e, #4a8428);
-            transform: scale(0.95);
-        }
-
-        /* ÉCRAN CENTRAL AGRANDI */
-        .center-screen {
-            width: 180px;
-            height: 70px;
-            background: linear-gradient(135deg, #1a3d0f, #2d5016);
-            border-radius: 20px;
-            border: 4px solid #4a8428;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            box-shadow: 
-                inset 0 4px 8px rgba(0, 0, 0, 0.4),
-                0 3px 6px rgba(0, 0, 0, 0.3);
-            transform: translateY(-40px);
-        }
-
-        .small-buttons {
-            display: flex;
-            gap: 50px;
-            margin-top: -10px;
-        }
-
-        .small-button {
-            width: 40px;
-            height: 25px;
-            background: linear-gradient(145deg, #4a8428, #3a6b1f);
-            border: 2px solid #5a9b32;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 
-                0 3px 6px rgba(0, 0, 0, 0.4),
-                inset 0 2px 0 rgba(255, 255, 255, 0.3);
-            position: relative;
-        }
-
-        .small-button[data-action="menu"]::before {
-            content: '';
-            position: absolute;
-            width: 16px;
-            height: 3px;
-            background: white;
-            border-radius: 2px;
-            box-shadow: 
-                0 -6px 0 white,
-                0 6px 0 white;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        /* BOUTONS ACTION AGRANDIS */
-        .action-buttons {
-            position: relative;
-            width: 160px;
-            height: 160px;
-            background: linear-gradient(145deg, #3a6b1f, #2d5016);
-            border-radius: 50%;
-            border: 3px solid #4a8428;
-            box-shadow: 
-                inset 0 4px 8px rgba(0, 0, 0, 0.4),
-                0 3px 6px rgba(0, 0, 0, 0.3);
-            padding: 12px;
-        }
-
-        .action-button {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid #5a9b32;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: all 0.2s ease;
-            color: white;
-            box-shadow: 
-                0 8px 16px rgba(0, 0, 0, 0.5),
-                inset 0 4px 8px rgba(255, 255, 255, 0.6),
-                inset 0 -4px 8px rgba(0, 0, 0, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .action-button.btn-y { top: 20px; left: 50%; transform: translateX(-50%); background: linear-gradient(145deg, #D4AF37, #B8860B) !important; }
-        .action-button.btn-x { left: 20px; top: 50%; transform: translateY(-50%); background: linear-gradient(145deg, #4169E1, #000080) !important; }
-        .action-button.btn-b { right: 20px; top: 50%; transform: translateY(-50%); background: linear-gradient(145deg, #DC143C, #8B0000) !important; }
-        .action-button.btn-a { bottom: 20px; left: 50%; transform: translateX(-50%); background: linear-gradient(145deg, #32CD32, #006400) !important; }
-
-        .action-button:hover {
-            transform: scale(0.9);
-        }
-
-        .btn-y:hover { transform: translateX(-50%) scale(0.9); }
-        .btn-a:hover { transform: translateX(-50%) scale(0.9); }
-        .btn-x:hover { transform: translateY(-50%) scale(0.9); }
-        .btn-b:hover { transform: translateY(-50%) scale(0.9); }
-
         /* ANIMATIONS */
         @keyframes pulse {
             0%, 100% { opacity: 1; }
@@ -767,8 +583,8 @@
             
             .screen-container {
                 max-width: 1400px;
-                height: 75vh;
-                max-height: 800px;
+                height: 80vh;
+                max-height: 900px;
             }
             
             .section-card {
@@ -792,12 +608,12 @@
             }
             
             .console-container {
-                gap: 25px;
+                gap: 0;
             }
             
             .screen-container {
-                height: 55vh;
-                min-height: 350px;
+                height: 65vh;
+                min-height: 450px;
             }
             
             .section-card {
@@ -812,11 +628,6 @@
             
             .section-card .icon {
                 font-size: 3rem;
-            }
-            
-            .controller {
-                height: 180px;
-                padding: 20px 25px;
             }
         }
 
@@ -838,9 +649,8 @@
     </style>
 </head>
 <body>
-    <!-- Le contenu HTML reste exactement le même que dans la version précédente -->
     <div class="console-container">
-        <!-- ÉCRAN PRINCIPAL -->
+        <!-- ÉCRAN PRINCIPAL SEUL -->
         <div class="screen-container">
             <div class="screen">
                 <div class="background-image"></div>
@@ -992,49 +802,10 @@
                 </div>
             </div>
         </div>
-
-        <!-- MANETTE -->
-        <div class="controller">
-            <div class="controller-content">
-                <!-- D-PAD -->
-                <div class="dpad">
-                    <div></div>
-                    <button class="dpad-button" data-direction="up">▲</button>
-                    <div></div>
-                    <button class="dpad-button" data-direction="left">◀</button>
-                    <div></div>
-                    <button class="dpad-button" data-direction="right">▶</button>
-                    <div></div>
-                    <button class="dpad-button" data-direction="down">▼</button>
-                    <div></div>
-                </div>
-
-                <!-- ÉCRAN CENTRAL -->
-                <div style="display: flex; flex-direction: column; align-items: center;">
-                    <button class="center-screen">
-                        <div id="consoleName">🍋 Console Portfolio</div>
-                        <div style="font-size: 0.8rem; opacity: 0.7;" id="consoleSubtext">Cliquez</div>
-                    </button>
-                    <div class="small-buttons">
-                        <button class="small-button" data-action="settings"></button>
-                        <button class="small-button" data-action="menu"></button>
-                    </div>
-                </div>
-
-                <!-- BOUTONS ACTION -->
-                <div class="action-buttons">
-                    <button class="action-button btn-y" data-button="y">Y</button>
-                    <button class="action-button btn-x" data-button="x">X</button>
-                    <button class="action-button btn-b" data-button="b">B</button>
-                    <button class="action-button btn-a" data-button="a">A</button>
-                </div>
-            </div>
-        </div>
     </div>
 
     <script>
-        // Le JavaScript reste exactement le même que dans la version précédente
-        class ConsolePortfolio {
+        class PortfolioInterface {
             constructor() {
                 this.currentSection = 0;
                 this.currentPage = null;
@@ -1075,9 +846,7 @@
                         contactText: "N'hésitez pas à me contacter pour discuter de vos projets.",
                         settingsTitle: "⚙ Paramètres",
                         languageLabel: "Langage :",
-                        brightnessLabel: "Luminosité :",
-                        consoleName: "🍋 Console Portfolio",
-                        consoleSubtext: "Cliquez"
+                        brightnessLabel: "Luminosité :"
                     },
                     en: {
                         styleSection: "Style",
@@ -1106,9 +875,7 @@
                         contactText: "Feel free to contact me to discuss your projects.",
                         settingsTitle: "⚙ Settings",
                         languageLabel: "Language:",
-                        brightnessLabel: "Brightness:",
-                        consoleName: "🍋 Portfolio Console",
-                        consoleSubtext: "Click"
+                        brightnessLabel: "Brightness:"
                     }
                 };
 
@@ -1132,24 +899,6 @@
             }
 
             setupEventListeners() {
-                // Navigation D-pad
-                document.querySelectorAll('.dpad-button').forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        const direction = button.dataset.direction;
-                        this.handleDpadNavigation(direction);
-                    });
-                });
-
-                // Boutons action
-                document.querySelectorAll('.action-button').forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        const buttonType = button.dataset.button;
-                        this.handleActionButton(buttonType);
-                    });
-                });
-
                 // Sections
                 this.sections.forEach((section, index) => {
                     section.addEventListener('click', () => {
@@ -1169,66 +918,40 @@
                     });
                 });
 
-                // Boutons petits
-                document.querySelectorAll('.small-button').forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        const action = button.dataset.action;
-                        this.handleSmallButton(action);
-                    });
-                });
-
                 // Support clavier
                 document.addEventListener('keydown', (e) => this.handleKeyboard(e));
             }
 
-            handleDpadNavigation(direction) {
-                const button = document.querySelector(`[data-direction="${direction}"]`);
-                button.classList.add('active');
-                setTimeout(() => button.classList.remove('active'), 200);
-
-                if (this.currentPage) {
-                    if (direction === 'up') {
-                        document.querySelector('.dedicated-page.active').scrollTop -= 100;
-                    } else if (direction === 'down') {
-                        document.querySelector('.dedicated-page.active').scrollTop += 100;
-                    }
-                } else {
-                    switch(direction) {
-                        case 'left':
-                            if (this.currentMenu === 'sections') {
-                                this.navigateSection(-1);
-                            } else {
-                                this.navigateBottomMenu(-1);
-                            }
-                            break;
-                        case 'right':
-                            if (this.currentMenu === 'sections') {
-                                this.navigateSection(1);
-                            } else {
-                                this.navigateBottomMenu(1);
-                            }
-                            break;
-                        case 'down':
-                            if (this.currentMenu === 'sections') {
-                                this.currentMenu = 'bottom-menu';
-                                this.currentBottomMenuItem = 0;
-                                this.updateMenuSelection();
-                            }
-                            break;
-                        case 'up':
-                            if (this.currentMenu === 'bottom-menu') {
-                                this.currentMenu = 'sections';
-                                this.updateMenuSelection();
-                            }
-                            break;
-                    }
-                }
-            }
-
-            handleActionButton(buttonType) {
-                switch(buttonType) {
-                    case 'a':
+            handleKeyboard(e) {
+                switch(e.key) {
+                    case 'ArrowLeft': 
+                        if (this.currentMenu === 'sections') {
+                            this.navigateSection(-1);
+                        } else {
+                            this.navigateBottomMenu(-1);
+                        }
+                        break;
+                    case 'ArrowRight': 
+                        if (this.currentMenu === 'sections') {
+                            this.navigateSection(1);
+                        } else {
+                            this.navigateBottomMenu(1);
+                        }
+                        break;
+                    case 'ArrowDown': 
+                        if (this.currentMenu === 'sections') {
+                            this.currentMenu = 'bottom-menu';
+                            this.currentBottomMenuItem = 0;
+                            this.updateMenuSelection();
+                        }
+                        break;
+                    case 'ArrowUp': 
+                        if (this.currentMenu === 'bottom-menu') {
+                            this.currentMenu = 'sections';
+                            this.updateMenuSelection();
+                        }
+                        break;
+                    case 'Enter': 
                         if (!this.currentPage) {
                             if (this.currentMenu === 'sections') {
                                 this.openSection(this.sections[this.currentSection].dataset.section);
@@ -1238,46 +961,6 @@
                             }
                         }
                         break;
-                    case 'b':
-                        if (this.currentPage) {
-                            this.goBack();
-                        } else if (this.currentMenu === 'bottom-menu') {
-                            this.currentMenu = 'sections';
-                            this.updateMenuSelection();
-                        }
-                        break;
-                }
-            }
-
-            handleBottomMenuAction(action) {
-                switch(action) {
-                    case 'settings':
-                        this.openSection('settings');
-                        break;
-                    case 'music':
-                        this.showNotification('🎵 Fonctionnalité musique à venir !');
-                        break;
-                }
-            }
-
-            handleSmallButton(action) {
-                switch(action) {
-                    case 'settings':
-                        this.openSection('settings');
-                        break;
-                    case 'menu':
-                        this.goBack();
-                        break;
-                }
-            }
-
-            handleKeyboard(e) {
-                switch(e.key) {
-                    case 'ArrowLeft': this.handleDpadNavigation('left'); break;
-                    case 'ArrowRight': this.handleDpadNavigation('right'); break;
-                    case 'ArrowDown': this.handleDpadNavigation('down'); break;
-                    case 'ArrowUp': this.handleDpadNavigation('up'); break;
-                    case 'Enter': this.handleActionButton('a'); break;
                     case 'Escape':
                     case 'Backspace': 
                         if (this.currentPage) {
@@ -1295,7 +978,7 @@
                 this.currentSection = (this.currentSection + direction + this.sections.length) % this.sections.length;
                 this.sections[this.currentSection].classList.add('active');
                 
-                const cardWidth = 285; // Augmenté pour les cartes plus grandes
+                const cardWidth = 285;
                 this.sectionsScroll.scrollTo({
                     left: this.currentSection * cardWidth - 50,
                     behavior: 'smooth'
@@ -1352,6 +1035,17 @@
                 }
             }
 
+            handleBottomMenuAction(action) {
+                switch(action) {
+                    case 'settings':
+                        this.openSection('settings');
+                        break;
+                    case 'music':
+                        this.showNotification('🎵 Fonctionnalité musique à venir !');
+                        break;
+                }
+            }
+
             changeLanguage(lang) {
                 this.currentLanguage = lang;
                 const t = this.translations[lang];
@@ -1389,8 +1083,14 @@
 
         // Initialisation
         document.addEventListener('DOMContentLoaded', () => {
-            new ConsolePortfolio();
+            new PortfolioInterface();
         });
+
+        // Fonction globale pour le bouton retour
+        function goBack() {
+            const portfolio = new PortfolioInterface();
+            portfolio.goBack();
+        }
     </script>
 </body>
 </html>
